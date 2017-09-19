@@ -1,3 +1,15 @@
+//Reference: http://wiki.osdev.org/Interrupt_Descriptor_Table
+
+
+/*-----------------------------------------------------------------------------------------------
+
+       1. Structure of idtr
+       2. Structure of IDT
+       3. init_idt() declaration [ Function to initialize IDT ]
+
+
+-------------------------------------------------------------------------------------------------*/
+
 #include <sys/defs.h>
 
 

@@ -1,7 +1,10 @@
 #include <sys/defs.h>
 
-void PIC_remap(int offset1, int offset2);
 
+
+// Reference : http://wiki.osdev.org/Inline_Assembly/Examples#I.2FO_access
+
+void PIC_remap(int offset1, int offset2);
 static inline void outb(uint16_t port, uint8_t val)
 {
     __asm__ ( "outb %0, %1" : : "a"(val), "Nd"(port) );
