@@ -5,9 +5,26 @@
 static volatile char *video = (volatile char*)0xB8000;
 static long data_written = 0;
 
+void flushLastKeyPress(char a, char b)
+{
+	char* timeArea = (char*)0xb8000+160*24 + 128;
+	int colour = 7;
+
+   	char secStr[13] = "KEY PRESSED: "; int ss = 0;
+   	while(ss < 13){
+   		*timeArea++ = secStr[ss++];
+   		*timeArea++ = colour;
+   	}	
+	
+	*timeArea++ = a;
+	*timeArea++ = colour;
+	*timeArea++ = b;
+	*timeArea++ = colour;
+}
+
 void flushtime(int seconds)
 {
-	char* timeArea = (char*)0xb8000+160*24 + 140;
+	char* timeArea = (char*)0xb8000+160*24 + 88;
 	char str[1024]; int i = 0;
 	while(seconds){
 		str[i++] = (seconds%10) + '0';
@@ -26,6 +43,11 @@ void flushtime(int seconds)
 	}
 
    	int colour = 7; int k = 0;
+   	char secStr[11] = "BOOT TIME: "; int ss = 0;
+   	while(ss < 11){
+   		*timeArea++ = secStr[ss++];
+   		*timeArea++ = colour;
+   	}
     while( str[k] != '\0' && str[k] != '\n')
     {
         *timeArea++ = str[k++];

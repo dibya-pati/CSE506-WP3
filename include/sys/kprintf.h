@@ -8,5 +8,6 @@
 
 void kprintf(const char *fmt, ...);
 void flushtime(int seconds);
+void flushLastKeyPress(char a, char b);
 
 #endif

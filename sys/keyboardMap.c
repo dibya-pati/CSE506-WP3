@@ -11,6 +11,7 @@ enum{
 };
 
 
+//Reference : http://wiki.osdev.org/PS2_Keyboard
 /*
 PS/2 keyboard code.
 Dependencies:
@@ -44,7 +45,8 @@ int CheckIfSpecialKey(int key)
 	return 0;
 }
 
-void MakeMapping(){
+//Reference : http://wiki.osdev.org/PS2_Keyboard : ScanCode Set 1
+void MakeKeyboardMapping(){
 	ScanCodeMap[(int)(0x04)] = '3';
 	ScanCodeMap[(int)(0x08)] = '7';
 	ScanCodeMap[(int)(0x0C)] = '-';

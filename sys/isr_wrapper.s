@@ -1,3 +1,4 @@
+#Reference : http://wiki.osdev.org/I_Cant_Get_Interrupts_Working
 .globl   key_fptr
 .globl   isr_wrapper
 .globl   timer_fptr

@@ -39,9 +39,12 @@ void keymama(void)
 		if (getCtrlKeyStatus())
 		{
 			setCtrlKeyStatus(0);
-			kprintf("^");
+			flushLastKeyPress('^', c);
 		}
-		kprintf("%c", c);
+		else
+		{
+			flushLastKeyPress(c, ' ');
+		}
 	}
 	
 	// IRQ_clear_mask('1');

@@ -34,7 +34,7 @@ void IRQ_set_mask(unsigned char IRQline);
 void IRQ_clear_mask(unsigned char IRQline);
 
 char getKeyBoardKey(int key);
-void MakeMapping();
+void MakeKeyboardMapping();
 char getchar();
 int getCtrlKeyStatus();
 void setCtrlKeyStatus(int _s);

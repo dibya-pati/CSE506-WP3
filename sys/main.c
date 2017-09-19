@@ -27,19 +27,6 @@ void start(uint32_t *modulep, void *physbase, void *physfree)
   kprintf("physfree %p\n", (uint64_t)physfree);
   kprintf("tarfs in [%p:%p]\n", &_binary_tarfs_start, &_binary_tarfs_end);
 
-
-init_idt();
-PIC_remap((int)0x20,(int)0x28);
-init_pit();
-MakeMapping();
-
-   // outb(0x21,0xfd);
-   // outb(0xa1,0xff);
-   __asm__("sti;");
-
-
-
-
   while(1){
     //Dont return from start
   }
@@ -58,8 +45,17 @@ void boot(void)
     :"=g"(loader_stack)
     :"r"(&initial_stack[INITIAL_STACK_SIZE])
   );
+  
   init_gdt();
-  start(
+  init_idt();
+  PIC_remap((int)0x20,(int)0x28);				//In protected mode, we need to set the master PIC's offset to 0x20 and the slave's to 0x28
+  init_pit();									// Reference : http://wiki.osdev.org/PIC
+  MakeKeyboardMapping();
+  __asm__("sti;");
+ 
+
+
+  start(										
     (uint32_t*)((char*)(uint64_t)loader_stack[3] + (uint64_t)&kernmem - (uint64_t)&physbase),
     (uint64_t*)&physbase,
     (uint64_t*)(uint64_t)loader_stack[4]
