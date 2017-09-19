@@ -3,6 +3,9 @@
 #include <sys/kprintf.h>
 #include <sys/tarfs.h>
 #include <sys/ahci.h>
+#include <sys/time.h>
+#include <sys/Utils.h>
+#include <sys/idt.h>
 
 #define INITIAL_STACK_SIZE 4096
 uint8_t initial_stack[INITIAL_STACK_SIZE]__attribute__((aligned(16)));
@@ -23,6 +26,23 @@ void start(uint32_t *modulep, void *physbase, void *physfree)
   }
   kprintf("physfree %p\n", (uint64_t)physfree);
   kprintf("tarfs in [%p:%p]\n", &_binary_tarfs_start, &_binary_tarfs_end);
+
+
+init_idt();
+PIC_remap((int)0x20,(int)0x28);
+init_pit();
+MakeMapping();
+
+   // outb(0x21,0xfd);
+   // outb(0xa1,0xff);
+   __asm__("sti;");
+
+
+
+
+  while(1){
+    //Dont return from start
+  }
 }
 
 void boot(void)
