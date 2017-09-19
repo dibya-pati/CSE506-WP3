@@ -49,8 +49,10 @@ void boot(void)
   init_gdt();
   init_idt();
   PIC_remap((int)0x20,(int)0x28);				//In protected mode, we need to set the master PIC's offset to 0x20 and the slave's to 0x28
-  init_pit();									// Reference : http://wiki.osdev.org/PIC
+  init_pit();									          // Reference : http://wiki.osdev.org/PIC
   MakeKeyboardMapping();
+  outb(0x21,0xfc);                      //Disable all interrupts in master PIC except IRQ0 and IRQ1
+  outb(0xa1,0xff);                      //Disable all interrupts in slave PIC
   __asm__("sti;");
  
 
