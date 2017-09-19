@@ -12,11 +12,6 @@ enum{
 
 
 //Reference : http://wiki.osdev.org/PS2_Keyboard
-/*
-PS/2 keyboard code.
-Dependencies:
-inb function and scancode table.
-*/
 char getScancode() {
     
     char c=0;

@@ -1,4 +1,5 @@
 // Reference: http://wiki.osdev.org/PIC
+// Used the code given in above reference link for PIC mapping
 
 #include <sys/Utils.h>
 
