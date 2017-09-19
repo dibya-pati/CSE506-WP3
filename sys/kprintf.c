@@ -57,9 +57,21 @@ void flushtime(int seconds)
 
 void checkForScroll(){
 
+	if (data_written >= 80*24)		//Last line for clock and keypress
+	{
+		//Clear Screen
+		for(char* temp = (char*)0xb8000; temp < (char*)0xb8000+160*24;){
+			*temp++ = ' ';
+			*temp++ = 7;
+		}		
+
+		video = (char*)0xb8000;
+		data_written = 0;
+	}
+
 	return;
 
-	if (data_written >= 80*25)
+	if (data_written >= 80*24)		//Last line for clock and keypress
 	{
 		//Scroll
 		char* oldLocation = (char*)0xb80a0; char* temp2;
