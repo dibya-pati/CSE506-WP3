@@ -122,6 +122,14 @@ void flushchar(const char ch)
 void flushint(int text)
 {
 	char str[1024]; int i = 0;
+
+	if (text == 0)
+	{
+		str[0] = '0';
+		str[1] = '\0';
+		return flush(str);
+	}
+
 	while(text){
 		str[i++] = (text%10) + '0';
 		text/=10;
